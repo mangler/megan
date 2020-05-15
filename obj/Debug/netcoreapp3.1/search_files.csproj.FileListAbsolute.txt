@@ -1,0 +1,13 @@
+C:\Users\d1vx0\Desktop\Src\search_files\bin\Debug\netcoreapp3.1\search_files.exe
+C:\Users\d1vx0\Desktop\Src\search_files\bin\Debug\netcoreapp3.1\search_files.deps.json
+C:\Users\d1vx0\Desktop\Src\search_files\bin\Debug\netcoreapp3.1\search_files.runtimeconfig.json
+C:\Users\d1vx0\Desktop\Src\search_files\bin\Debug\netcoreapp3.1\search_files.runtimeconfig.dev.json
+C:\Users\d1vx0\Desktop\Src\search_files\bin\Debug\netcoreapp3.1\search_files.dll
+C:\Users\d1vx0\Desktop\Src\search_files\bin\Debug\netcoreapp3.1\search_files.pdb
+C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.csprojAssemblyReference.cache
+C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.csproj.CoreCompileInputs.cache
+C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.AssemblyInfoInputs.cache
+C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.AssemblyInfo.cs
+C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.dll
+C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.pdb
+C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.genruntimeconfig.cache
