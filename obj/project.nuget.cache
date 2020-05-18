@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "im8uUadfAFJWpyhMK7vbas0Sehl7Lipm85jhE/n2hDjBwDFAMfAmeUBhkV62F+kP8z79P37AuwDYmU48gIuLzA==",
+  "dgSpecHash": "MaiZ5PlaTtfXFA06b3FopD4pNjVB0kqSHmFwYWWqQsAGyYB59VIct1rCTIAJadbPg1EW9JMnJjuBxKqZBlIZEg==",
   "success": true,
   "projectFilePath": "C:\\Users\\d1vx0\\Desktop\\Src\\search_files\\search_files.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\d1vx0\\.nuget\\packages\\sixlabors.imagesharp\\1.0.0-rc0001\\sixlabors.imagesharp.1.0.0-rc0001.nupkg.sha512"
+  ],
   "logs": []
 }

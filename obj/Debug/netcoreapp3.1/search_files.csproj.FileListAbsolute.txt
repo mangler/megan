@@ -11,3 +11,5 @@ C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.Ass
 C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.dll
 C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.pdb
 C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.genruntimeconfig.cache
+C:\Users\d1vx0\Desktop\Src\search_files\bin\Debug\netcoreapp3.1\SixLabors.ImageSharp.dll
+C:\Users\d1vx0\Desktop\Src\search_files\obj\Debug\netcoreapp3.1\search_files.csproj.CopyComplete
