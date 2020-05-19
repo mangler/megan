@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\d1vx0\\Desktop\\Src\\search_files\\search_files.csproj": {}
+    "/Users/msit/Desktop/src/megan/search_files.csproj": {}
   },
   "projects": {
-    "C:\\Users\\d1vx0\\Desktop\\Src\\search_files\\search_files.csproj": {
+    "/Users/msit/Desktop/src/megan/search_files.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\d1vx0\\Desktop\\Src\\search_files\\search_files.csproj",
+        "projectUniqueName": "/Users/msit/Desktop/src/megan/search_files.csproj",
         "projectName": "search_files",
-        "projectPath": "C:\\Users\\d1vx0\\Desktop\\Src\\search_files\\search_files.csproj",
-        "packagesPath": "C:\\Users\\d1vx0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\d1vx0\\Desktop\\Src\\search_files\\obj\\",
+        "projectPath": "/Users/msit/Desktop/src/megan/search_files.csproj",
+        "packagesPath": "/Users/msit/.nuget/packages/",
+        "outputPath": "/Users/msit/Desktop/src/megan/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\d1vx0\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/msit/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -56,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.202/RuntimeIdentifierGraph.json"
         }
       }
     }

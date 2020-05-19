@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "MaiZ5PlaTtfXFA06b3FopD4pNjVB0kqSHmFwYWWqQsAGyYB59VIct1rCTIAJadbPg1EW9JMnJjuBxKqZBlIZEg==",
+  "dgSpecHash": "4KeWqv9t+74M7ZpHU9s/mCqn0FPg0kn7j4uUxoUoejWbzH6s89VLDeG9QjERfz2sP05gWG/YFAObRFMNGEDokQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\d1vx0\\Desktop\\Src\\search_files\\search_files.csproj",
+  "projectFilePath": "/Users/msit/Desktop/src/megan/search_files.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\d1vx0\\.nuget\\packages\\sixlabors.imagesharp\\1.0.0-rc0001\\sixlabors.imagesharp.1.0.0-rc0001.nupkg.sha512"
+    "/Users/msit/.nuget/packages/sixlabors.imagesharp/1.0.0-rc0001/sixlabors.imagesharp.1.0.0-rc0001.nupkg.sha512"
   ],
   "logs": []
 }

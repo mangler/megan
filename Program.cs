@@ -35,7 +35,6 @@ namespace search_files
 
                         foreach (var file in Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(f => extentions.IndexOf(Path.GetExtension(f)) >= 0))
                         {
-                            Thread.Sleep(500);
                             results[excludes.Any(c => Path.GetFileName(file).Contains(c)) ? Result.Ignored : Result.Found].Add(file);
                         }
 
