@@ -36,6 +36,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.1.2, )"
+            },
             "SixLabors.ImageSharp": {
               "target": "Package",
               "version": "[1.0.0-rc0001, )"
