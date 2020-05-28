@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Threading;
-using System.Drawing;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
+using OfficeOpenXml;
 
 namespace search_files
 {
@@ -13,6 +10,8 @@ namespace search_files
     {
         static void Main(string[] args)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             var path = GetPath();
             List<string> extentions;
             if (!string.IsNullOrEmpty(path))
@@ -33,30 +32,50 @@ namespace search_files
                             {Result.Found, new List<string>()},
                         };
 
+                        var toProcess = new List<Info>();
+                        var notImage = new List<string>();
+
                         foreach (var file in Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(f => extentions.IndexOf(Path.GetExtension(f)) >= 0))
                         {
-                            results[excludes.Any(c => Path.GetFileName(file).Contains(c)) ? Result.Ignored : Result.Found].Add(file);
+                            results[excludes.Any(c => Path.GetFileName(file.ToLower()).Contains(c.ToLower())) ? Result.Ignored : Result.Found].Add(file);
                         }
 
                         foreach (var kvp in results.Where(c => c.Value.Any()))
                         {
-                            Console.WriteLine($"Files {kvp.Key}");
                             foreach (var file in kvp.Value)
                             {
-                                try
+                                if (kvp.Key == Result.Ignored)
                                 {
-                                    using (var image = Image.Load(file))
+                                    Console.WriteLine($"\tIgnored: {Path.GetFileName(file)}");
+                                }
+                                else
+                                {
+                                    try
                                     {
-                                        Console.WriteLine($"\t{Path.GetFileName(file)} [{image.Width}x{image.Height}]");
+                                        using (var image = SixLabors.ImageSharp.Image.Load(file))
+                                        {
+                                            toProcess.Add(new Info
+                                            {
+                                                Path = file,
+                                                Height = image.Height,
+                                                Width = image.Width
+
+                                            });
+                                            Console.WriteLine($"\tProcessed: {Path.GetFileName(file)} [{image.Width}x{image.Height}]");
+                                        }
+                                    }
+                                    catch (SixLabors.ImageSharp.UnknownImageFormatException)
+                                    {
+                                        Console.WriteLine($"\tNot an image: {Path.GetFileName(file)}");
+                                        notImage.Add(Path.GetFileName(file));
                                     }
                                 }
-                                catch (SixLabors.ImageSharp.UnknownImageFormatException)
-                                {
-                                    Console.WriteLine($"\t{Path.GetFileName(file)}");
-                                }
+
                             }
-                            Console.WriteLine();
                         }
+
+                        WriteToExcel(toProcess, results[Result.Ignored], notImage);
+
                     }
                     catch (Exception ex)
                     {
@@ -75,6 +94,57 @@ namespace search_files
             Console.WriteLine();
             Console.WriteLine("Done! Press any key to exit...");
             Console.ReadKey();
+        }
+        private static void WriteToExcel(List<Info> found, List<string> ignored, List<string> notimage)
+        {
+
+            using (var package = new ExcelPackage(new System.IO.FileInfo($"results_{DateTime.Now.ToFileTimeUtc()}.xlsx")))
+            {
+                var ignoreSheet = package.Workbook.Worksheets.Add("Ignored from exclusion filter");
+                for (int i = 0; i < ignored.Count; i++)
+                {
+                    ignoreSheet.Cells[$"A{i + 1}"].Value = Path.GetFileName(ignored[i]);
+                }
+                ignoreSheet.Column(1).AutoFit();
+                ignoreSheet.InsertRow(1, 1);
+                ignoreSheet.Cells["A1"].Style.Font.Bold = true;
+                ignoreSheet.Cells["A1"].Value = "Ignored";
+
+                var notImageSheet = package.Workbook.Worksheets.Add("Found but not an image");
+                for (int i = 0; i < notimage.Count; i++)
+                {
+                    notImageSheet.Cells[$"A{i + 1}"].Value = Path.GetFileName(notimage[i]);
+                }
+                notImageSheet.Column(1).AutoFit();
+                notImageSheet.InsertRow(1, 1);
+                notImageSheet.Cells["A1"].Style.Font.Bold = true;
+                notImageSheet.Cells["A1"].Value = "Not an image";
+
+                var foundSheet = package.Workbook.Worksheets.Add("Found");
+                for (int i = 0; i < found.Count; i++)
+                {
+                    foundSheet.Cells[i + 1, 1].Value = Path.GetFileName(found[i].Path);
+                    foundSheet.Cells[i + 1, 2].Value = Path.GetDirectoryName(found[i].Path);
+                    foundSheet.Cells[i + 1, 3].Value = found[i].Height;
+                    foundSheet.Cells[i + 1, 4].Value = found[i].Width;
+                }
+                foundSheet.Column(1).AutoFit();
+                foundSheet.Column(2).AutoFit();
+                foundSheet.Column(3).AutoFit();
+                foundSheet.Column(4).AutoFit();
+                foundSheet.InsertRow(1, 1);
+                foundSheet.Cells["A1"].Style.Font.Bold = true;
+                foundSheet.Cells["A1"].Value = "File";
+                foundSheet.Cells["B1"].Style.Font.Bold = true;
+                foundSheet.Cells["B1"].Value = "Path";
+                foundSheet.Cells["C1"].Style.Font.Bold = true;
+                foundSheet.Cells["C1"].Value = "Height";
+                foundSheet.Cells["D1"].Style.Font.Bold = true;
+                foundSheet.Cells["D1"].Value = "Height";
+                foundSheet.Cells["A1:D1"].AutoFilter = true;
+                
+                package.Save();
+            }
         }
 
         private static List<string> GetExclusions()
@@ -178,6 +248,13 @@ namespace search_files
     {
         public const string Found = "Found";
         public const string Ignored = "Ignored";
+    }
+
+    internal class Info
+    {
+        public string Path { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
     }
 
 }
