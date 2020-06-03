@@ -1,0 +1,20 @@
+{
+    "PathToSearch": "C:\\Users\\d1vx0\\Desktop\\Megan",
+    "ArchiveFolder": ".archive",
+    "Extensions": [
+        ".jpg",
+        ".jpeg",
+        ".gif",
+        ".png",
+        ".tiff"
+    ],
+    "Excludes": [
+        "logo",
+        "hero",
+        "rtud"
+    ],
+    "Dimensions": {
+        "Height": 600,
+        "Width": 600
+    }
+}
