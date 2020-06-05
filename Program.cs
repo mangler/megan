@@ -11,12 +11,12 @@ namespace search_files
 
             Console.WriteLine(Settings.Options);
 
-            var spinner = new Spinner(5, 5);
+            var spinner = new Spinner(10, 10);
 
             spinner.Start();
 
             var files = Directory.GetFiles(Settings.Options.PathToSearch, "*.*", SearchOption.AllDirectories)
-                                  .Where(f => Settings.Options.Extensions.IndexOf(Path.GetExtension(f)) >= 0)
+                                  .Where(f => Settings.Options.Extensions.IndexOf(Path.GetExtension(f.ToLower())) >= 0)
                                   .Select(c => new Info { Path = c })
                                   .ToList();
 

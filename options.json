@@ -1,6 +1,6 @@
 {
-    "PathToSearch": "C:\\Users\\d1vx0\\Desktop\\Megan",
-    "ArchiveFolder": ".archive",
+    "PathToSearch": "/Users/msit/Desktop/Test Large1",
+    "ArchiveFolder": "archive",
     "Extensions": [
         ".jpg",
         ".jpeg",
@@ -11,10 +11,11 @@
     "Excludes": [
         "logo",
         "hero",
-        "rtud"
+        "rtud",
+        "vertical"
     ],
     "Dimensions": {
-        "Height": 600,
-        "Width": 600
+        "Height": 799,
+        "Width": 999
     }
 }

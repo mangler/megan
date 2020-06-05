@@ -3,6 +3,7 @@ using OfficeOpenXml;
 using System.IO;
 using System;
 using OfficeOpenXml.Style;
+using System.Linq;
 using System.Drawing;
 
 namespace search_files
@@ -13,11 +14,11 @@ namespace search_files
         static Utils()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            ArchiveDir = Directory.CreateDirectory($"{Settings.Options.PathToSearch}\\{Settings.Options.ArchiveFolder}\\{DateTime.Now.ToString("yyyy-MM-dd_HHmmss")}").FullName;
+            ArchiveDir = Directory.CreateDirectory($"{Settings.Options.PathToSearch}/{Settings.Options.ArchiveFolder}/{DateTime.Now.ToString("yyyy-MM-dd_HHmmss")}").FullName;
         }
         public static void WriteToExcelAndArchive(List<Info> files)
         {
-            using (var package = new ExcelPackage(new System.IO.FileInfo($"{ArchiveDir}\\results.xlsx")))
+            using (var package = new ExcelPackage(new System.IO.FileInfo($"{ArchiveDir}/results.xlsx")))
             {
                 var all = package.Workbook.Worksheets.Add("Index");
                 for (int i = 0; i < files.Count; i++)
@@ -27,7 +28,7 @@ namespace search_files
                     all.Cells[i + 1, 3].Value = files[i].Width;
                     all.Cells[i + 1, 4].Value = Path.GetDirectoryName(files[i].Path);
 
-                    if (files[i].Height <= Settings.Options.Dimensions.Height || files[i].Width <= Settings.Options.Dimensions.Width)
+                    if ((!Settings.Options.Excludes.Any(c=> Path.GetFileName(files[i].Path.ToLower()).Contains(c.ToLower()))) && (files[i].Height < Settings.Options.Dimensions.Height || files[i].Width < Settings.Options.Dimensions.Width))
                     {
                         all.Row(i + 1).Style.Fill.PatternType = ExcelFillStyle.Solid;
                         all.Row(i + 1).Style.Fill.BackgroundColor.SetColor(Color.Orange);
@@ -56,7 +57,7 @@ namespace search_files
             }
         }
 
-        static void Archive(string file) => File.Move(file, $"{ArchiveDir}\\{Path.GetFileName(file)}");
+        static void Archive(string file) => File.Move(file, $"{ArchiveDir}/{Path.GetFileName(file)}", true);
     }
 }
 
