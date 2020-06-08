@@ -15,22 +15,28 @@ namespace search_files
 
             spinner.Start();
 
-            var files = Directory.GetFiles(Settings.Options.PathToSearch, "*.*", SearchOption.AllDirectories)
-                                  .Where(f => Settings.Options.Extensions.IndexOf(Path.GetExtension(f.ToLower())) >= 0)
-                                  .Select(c => new Info { Path = c })
-                                  .ToList();
+            var files =
+             new DirectoryInfo(Settings.Options.PathToSearch)
+                  .EnumerateDirectories()
+                  .SelectMany(di => di.EnumerateFiles("*.*", SearchOption.AllDirectories)
+                  .Where(f => Settings.Options.Extensions.Any(g => g.Equals(f.Extension, StringComparison.CurrentCultureIgnoreCase)))
+                  .Where(p => !Path.GetDirectoryName(p.DirectoryName).Contains(Settings.Options.ArchiveFolder, StringComparison.CurrentCultureIgnoreCase))
+                  .Select(c => new Info { Path = c.FullName }))
+                  .ToList();
 
             foreach (var file in files)
             {
                 try
                 {
-                    using (var image = SixLabors.ImageSharp.Image.Load(file.Path))
+                    using (var stream = File.Open(file.Path, FileMode.Open))
+                    using (var image = System.Drawing.Image.FromStream(stream, false, false))
                     {
                         file.Width = image.Width;
                         file.Height = image.Height;
                     }
                 }
-                catch (SixLabors.ImageSharp.UnknownImageFormatException) { }
+                catch (ArgumentException) { }
+
             }
 
             Utils.WriteToExcelAndArchive(files);
